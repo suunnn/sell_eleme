@@ -1,6 +1,6 @@
 # sell
 
-> A Vue.js project
+> A Vue.js project for ele
 
 ## Build Setup
 
