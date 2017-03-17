@@ -1,18 +1,15 @@
 <template>
   <div>
-    <v-header></v-header>
+    <v-header :seller="seller"></v-header>
     <div class="tab border-1px">
       <div class="tab-item">
         <router-link to="/goods">商品</router-link>
-        <!-- <a v-link="{path: '/goods'}">商品</a> -->
       </div>
       <div class="tab-item">
         <router-link to="/ratings">评论</router-link>
-        <!-- <a v-link="{path: '/ratings'}">评论</a> -->
       </div>
       <div class="tab-item">
         <router-link to="/seller">商家</router-link>
-        <!-- <a v-link="{path: '/seller'}">商家</a> -->
       </div>
     </div>
     <!-- 路由匹配到的组件将渲染在这里 -->
@@ -23,11 +20,22 @@
 <script>
   import header from 'components/header/header.vue';
 
+  const ERR_OK = 0;
+
   export default {
-    data() {
+    data () {
       return {
         seller: {}
-      }
+      };
+    },
+    created () {
+      this.$http.get('/api/seller').then((response) => {
+        response = response.body;
+        if (response.errno === ERR_OK) {
+          this.seller = response.data;
+          console.log(this.seller);
+        }
+      });
     },
     components: {
       'v-header': header
