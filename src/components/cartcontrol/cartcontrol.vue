@@ -32,6 +32,7 @@
         } else {
           this.food.count++;
         }
+        this.$emit('cart.add', event.target);
       },
       decreaseCart (event) {
         if (event.isTrusted) {
